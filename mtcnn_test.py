@@ -37,19 +37,3 @@ if __name__ == '__main__':
 
     cv2.waitKey(wait)
     cv2.destroyAllWindows()
-
-    # a = detector.detect_faces(cv2.imread("gr.jpg", cv2.COLOR_BGR2RGB))
-    # pprint.pprint(a)
-    #
-    # cap.release()
-
-    # img = cv2.cvtColor(cv2.imread("a.jpg"))
-    # a = cv2.VideoCapture()
-    # detector = MTCNN()
-    # a = detector.detect_faces(img)
-    # pprint.pprint(a)
-    # print('Device Name: '+tf.test.gpu_device_name())
-    #print(a)
-    # x = torch.rand(5, 3)
-    # x = torch.cuda.is_available()
-    # print(x)

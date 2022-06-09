@@ -18,6 +18,7 @@ if __name__ == '__main__':
     while cap.isOpened():
         cap.set(cv2.CAP_PROP_POS_FRAMES, count)
         ret, frame = cap.read()
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         if ret:
             a = detector.detect_faces(frame)
             if a:
@@ -27,9 +28,11 @@ if __name__ == '__main__':
                 height = a[0]["box"][3]
                 # cv2.rectangle(frame, (x,y), (x+width, y+height), colour, 2)
                 croped_frame = frame[y:(y+height), x:(x+width)]
-                transf = image_transformer.TransformImage
-                transf.resize_and_pad(transf, croped_frame)
+                transf = image_transformer.TransformImage()
+                croped_frame = transf.resize_and_pad(croped_frame)
+                croped_frame = cv2.cvtColor(croped_frame, cv2.COLOR_RGB2BGR)
                 cv2.imshow("a", croped_frame)
+                # cv2.imwrite("frames/output{:d}.jpg".format(count), croped_frame)
                 pprint.pprint(a)
             count += step
             cv2.waitKey(wait)

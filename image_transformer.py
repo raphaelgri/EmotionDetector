@@ -1,3 +1,5 @@
+import torch
+import torchvision.transforms
 from PIL import Image
 import os
 import torchvision.transforms as transforms
@@ -20,6 +22,11 @@ class TransformImage:
         return w_diff, h_diff
 
     def resize_and_pad(self, img):
+        a = type(img).__name__
+        print(a)
+        if a == 'ndarray':
+            img = torch.from_numpy(img)
+            img = torchvision.transforms.ToPILImage()(img)
         w, h = img.size
         w_diff, h_diff = self.difference(img.size)
         if h_diff > 0 or w_diff > 0:

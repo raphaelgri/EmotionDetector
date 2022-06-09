@@ -2,6 +2,8 @@ from mtcnn import MTCNN
 import cv2
 import pprint
 
+import image_transformer
+
 if __name__ == '__main__':
 
     cap = cv2.VideoCapture('video.mp4')
@@ -23,8 +25,11 @@ if __name__ == '__main__':
                 y = a[0]["box"][1]
                 width = a[0]["box"][2]
                 height = a[0]["box"][3]
-                cv2.rectangle(frame, (x,y), (x+width, y+height), colour, 2)
-                cv2.imshow("a", frame)
+                # cv2.rectangle(frame, (x,y), (x+width, y+height), colour, 2)
+                croped_frame = frame[y:(y+height), x:(x+width)]
+                transf = image_transformer.TransformImage
+                transf.resize_and_pad(transf, croped_frame)
+                cv2.imshow("a", croped_frame)
                 pprint.pprint(a)
             count += step
             cv2.waitKey(wait)
